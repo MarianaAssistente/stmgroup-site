@@ -5,1015 +5,767 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panteão Digital — Como Criar Seu Panteão de Agentes IA</title>
   <meta name="description" content="O guia completo para montar seu sistema de múltiplos agentes IA do zero ao funcionamento em 7 dias, sem precisar saber programar." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0a0c14;
-      --bg2: #0d0f1a;
-      --bg3: #111320;
-      --purple: #6366f1;
-      --purple-light: #818cf8;
-      --green: #10b981;
-      --green-light: #34d399;
-      --text: #f1f5f9;
-      --text-sec: #94a3b8;
-      --border: rgba(99,102,241,0.2);
-      --red: #ef4444;
+      --bg: #0A0A0F;
+      --bg-card: #0f0f18;
+      --bg2: #0d0d16;
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --text: #F5F5F0;
+      --text-sec: rgba(245,245,240,0.6);
+      --border: rgba(201,168,76,0.15);
+      --green: #6fcf97;
     }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; font-size: 16px; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    svg { display: inline-block; }
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    /* ─── STICKY TOP BAR ─────────────────────────────── */
-    #sticky-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: linear-gradient(90deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+    /* ─── STICKY NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      background: rgba(10,10,15,0.97); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
     }
-
-    #sticky-bar .bar-text {
-      font-size: 0.85rem;
-      color: #c7d2fe;
-      white-space: nowrap;
+    .nav-left { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.08em; }
+    .nav-brand span { color: var(--gold); }
+    .nav-countdown {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--text-sec); display: flex; align-items: center; gap: 0.5rem;
     }
-
-    #countdown {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #fff;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: 0.05em;
+    .nav-countdown strong { color: var(--gold); font-variant-numeric: tabular-nums; }
+    .nav-cta {
+      padding: 0.55rem 1.1rem; border: 1px solid var(--gold);
+      color: var(--gold); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
     }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
 
-    .bar-cta {
-      background: var(--purple);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 6px;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-    .bar-cta:hover { background: var(--purple-light); }
-
-    /* ─── LAYOUT ─────────────────────────────────────── */
-    main { padding-top: 50px; }
-    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 80px 0; }
-
-    /* ─── HERO ───────────────────────────────────────── */
+    /* ─── HERO ─── */
     #hero {
-      padding: 100px 0 80px;
-      text-align: center;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+      min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 5rem; position: relative; overflow: hidden;
     }
-
-    .badge {
-      display: inline-block;
-      background: rgba(99,102,241,0.15);
-      border: 1px solid rgba(99,102,241,0.4);
-      color: var(--purple-light);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 28px;
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(76,110,201,0.06) 0%, transparent 60%);
     }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 40%, var(--purple-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero-grid-bg {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.025;
+      background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
-
-    .subheadline {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: var(--text-sec);
-      max-width: 640px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
+    .hero-content { width: 100%; max-width: 700px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--border); padding: 0.4rem 1rem;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
     }
-
-    .price-anchor {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 28px;
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    h1.hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700; line-height: 1.1;
+      color: var(--text); margin-bottom: 1.25rem;
     }
-
-    .price-original {
-      font-size: 1.1rem;
-      color: var(--text-sec);
-      text-decoration: line-through;
-      opacity: 0.7;
+    h1.hero-title span { color: var(--gold); font-style: italic; }
+    .hero-sub { font-size: 0.95rem; font-weight: 300; color: var(--text-sec); line-height: 1.85; margin-bottom: 1.5rem; max-width: 600px; }
+    .hero-price {
+      display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;
     }
-
-    .price-current {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--green);
+    .price-original { font-size: 1rem; color: var(--text-sec); text-decoration: line-through; opacity: 0.6; }
+    .price-current { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .price-badge {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--border); padding: 0.3rem 0.7rem;
     }
-
-    .price-label {
-      font-size: 0.8rem;
-      color: var(--text-sec);
-      background: rgba(16,185,129,0.1);
-      border: 1px solid rgba(16,185,129,0.3);
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-
+    .hero-actions { display: flex; flex-direction: column; gap: 0.85rem; width: 100%; align-items: center; }
     .btn-primary {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--purple) 0%, #4f46e5 100%);
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 18px 36px;
-      border-radius: 12px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(99,102,241,0.4);
+      display: inline-block; padding: 0.95rem 2rem; background: var(--gold); color: var(--bg);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-align: center;
+      transition: background 0.2s, transform 0.2s;
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(99,102,241,0.5);
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-primary.wide { width: 100%; max-width: 420px; }
+    .btn-ghost {
+      display: inline-block; padding: 0.95rem 2rem;
+      border: 1px solid rgba(201,168,76,0.4); color: var(--text-sec);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
     }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .trust-note { font-size: 0.78rem; color: var(--text-sec); margin-top: 0.75rem; }
 
-    .trust-note {
-      margin-top: 16px;
-      font-size: 0.82rem;
-      color: var(--text-sec);
+    /* ─── SECTIONS ─── */
+    section { padding: 5rem 0; }
+    .section-label {
+      display: block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 1rem;
     }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.5rem); font-weight: 700; line-height: 1.18; text-align: center; color: var(--text);
+    }
+    .section-title span { color: var(--gold); font-style: italic; }
+    .section-title .danger { color: #c0392b; font-style: normal; }
+    .gold-rule { width: 40px; height: 1px; background: var(--gold); margin: 1.25rem auto 3rem; }
+    .section-intro { font-size: 0.9rem; color: var(--text-sec); line-height: 1.85; text-align: center; max-width: 600px; margin: 0 auto 3rem; }
 
-    /* ─── VIDEO ──────────────────────────────────────── */
+    /* ─── VIDEO ─── */
     #video { background: var(--bg2); }
-
-    .video-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .video-label {
-      font-size: 0.9rem;
-      color: var(--text-sec);
-      margin-bottom: 20px;
-    }
-
+    .video-wrap { max-width: 720px; margin: 0 auto; text-align: center; }
+    .video-label { font-size: 0.85rem; color: var(--text-sec); margin-bottom: 1.25rem; letter-spacing: 0.02em; }
     .video-thumb {
-      position: relative;
-      background: var(--bg3);
+      position: relative; background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
       aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;
+      transition: border-color 0.3s;
     }
-
+    .video-thumb:hover { border-color: var(--gold); }
     .video-thumb::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(99,102,241,0.1) 0%, transparent 70%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%);
     }
-
     .play-btn {
-      width: 72px;
-      height: 72px;
-      background: rgba(99,102,241,0.9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-      transition: transform 0.2s, background 0.2s;
+      width: 72px; height: 72px; background: rgba(201,168,76,0.9);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1; transition: transform 0.2s, background 0.2s;
     }
-
-    .video-thumb:hover .play-btn {
-      transform: scale(1.1);
-      background: var(--purple);
-    }
-
+    .video-thumb:hover .play-btn { transform: scale(1.08); background: var(--gold); }
     .play-btn::after {
-      content: '';
-      border-style: solid;
-      border-width: 12px 0 12px 22px;
-      border-color: transparent transparent transparent #fff;
+      content: ''; border-style: solid;
+      border-width: 12px 0 12px 20px; border-color: transparent transparent transparent #0A0A0F;
       margin-left: 4px;
     }
 
-    /* ─── SECTION TITLE ──────────────────────────────── */
-    .section-title {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 800;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .section-title span { color: var(--purple-light); }
-
-    /* ─── PARA QUEM É ────────────────────────────────── */
-    #para-quem { background: var(--bg); }
-
-    .check-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
+    /* ─── CHECK LIST ─── */
+    .check-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
     .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 1rem 1.25rem; transition: border-color 0.3s;
     }
-
+    .check-item:hover { border-color: var(--gold); }
     .check-icon {
-      width: 24px;
-      height: 24px;
-      background: rgba(16,185,129,0.15);
-      border: 1px solid rgba(16,185,129,0.4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 0.75rem;
-      color: var(--green);
-      font-weight: 700;
-      margin-top: 1px;
+      width: 22px; height: 22px; border: 1px solid rgba(201,168,76,0.4);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 0.7rem; color: var(--gold); font-weight: 700; margin-top: 2px;
     }
-
-    .check-item p { font-size: 0.92rem; line-height: 1.5; color: var(--text-sec); }
+    .check-item p { font-size: 0.875rem; line-height: 1.6; color: var(--text-sec); }
     .check-item strong { color: var(--text); }
 
-    /* ─── MÓDULOS ─────────────────────────────────────── */
+    /* ─── MODULES ─── */
     #modulos { background: var(--bg2); }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
+    .modules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
     .module-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      transition: border-color 0.2s;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem; transition: border-color 0.3s, transform 0.3s;
     }
+    .module-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .module-num { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .module-icon { font-size: 1.6rem; margin-bottom: 0.85rem; }
+    .module-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .module-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.7; }
 
-    .module-card:hover { border-color: var(--purple); }
-
-    .module-num {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple-light);
-      margin-bottom: 8px;
-    }
-
-    .module-icon { font-size: 1.8rem; margin-bottom: 12px; }
-
-    .module-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .module-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.6; }
-
-    /* ─── BÔNUS ───────────────────────────────────────── */
-    #bonus { background: var(--bg); }
-
-    .bonus-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
+    /* ─── BONUS ─── */
+    .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; max-width: 860px; margin: 0 auto; }
     .bonus-card {
-      background: linear-gradient(135deg, var(--bg3) 0%, rgba(99,102,241,0.05) 100%);
-      border: 1px solid rgba(99,102,241,0.3);
-      border-radius: 16px;
-      padding: 28px 24px;
-      text-align: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 2rem 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.3s;
     }
-
-    .bonus-icon { font-size: 2.2rem; margin-bottom: 12px; }
-
-    .bonus-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-
-    .bonus-desc { font-size: 0.82rem; color: var(--text-sec); margin-bottom: 14px; }
-
+    .bonus-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .bonus-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .bonus-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .bonus-desc { font-size: 0.82rem; color: var(--text-sec); line-height: 1.65; margin-bottom: 1rem; }
     .bonus-value {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--green);
-      background: rgba(16,185,129,0.1);
-      border: 1px solid rgba(16,185,129,0.25);
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 100px;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--border); display: inline-block; padding: 0.3rem 0.75rem;
     }
 
-    /* ─── PREÇO ───────────────────────────────────────── */
+    /* ─── PRICING ─── */
     #preco { background: var(--bg2); }
-
     .preco-box {
-      max-width: 480px;
-      margin: 0 auto;
-      background: var(--bg3);
-      border: 2px solid var(--purple);
-      border-radius: 20px;
-      padding: 40px 36px;
-      text-align: center;
-      box-shadow: 0 0 60px rgba(99,102,241,0.15);
+      max-width: 500px; margin: 0 auto;
+      background: var(--bg-card); border: 1px solid var(--gold);
+      padding: 2.5rem 2rem; text-align: center;
     }
-
-    .preco-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--purple-light);
-      margin-bottom: 24px;
-    }
-
+    .preco-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
     .preco-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.9rem;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 0; border-bottom: 1px solid rgba(201,168,76,0.07);
+      font-size: 0.875rem;
     }
-
     .preco-row:last-of-type { border-bottom: none; }
-
     .preco-row .label { color: var(--text-sec); }
     .preco-row .value { font-weight: 600; }
-    .preco-row .value.strike { text-decoration: line-through; opacity: 0.5; }
+    .preco-row .value.strike { text-decoration: line-through; opacity: 0.45; }
     .preco-row .value.discount { color: var(--green); }
-    .preco-row .value.total { font-size: 1.5rem; font-weight: 800; color: var(--green); }
+    .preco-row .value.total { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    .preco-divider { margin: 1.5rem 0; border: none; border-top: 1px solid var(--border); }
+    .trust-seals { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.25rem; font-size: 0.75rem; color: var(--text-sec); }
 
-    .preco-divider { margin: 24px 0; border: none; border-top: 1px solid rgba(255,255,255,0.08); }
-
-    .preco-after {
-      font-size: 0.8rem;
-      color: var(--text-sec);
-      margin-top: 14px;
-    }
-
-    .trust-seals {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      font-size: 0.8rem;
-      color: var(--text-sec);
-    }
-
-    /* ─── DEPOIMENTOS ─────────────────────────────────── */
-    #depoimentos { background: var(--bg); }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
+    /* ─── DEPOIMENTOS ─── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
     .testimonial-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 24px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem; transition: border-color 0.3s;
     }
-
-    .testimonial-stars { color: #fbbf24; font-size: 0.9rem; margin-bottom: 14px; }
-
-    .testimonial-quote { font-size: 0.95rem; line-height: 1.65; color: var(--text-sec); font-style: italic; margin-bottom: 20px; }
-
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-
+    .testimonial-card:hover { border-color: var(--gold); }
+    .testimonial-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.2em; }
+    .testimonial-quote { font-size: 0.9rem; line-height: 1.75; color: var(--text-sec); font-style: italic; margin-bottom: 1.25rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.85rem; }
     .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple) 0%, #4f46e5 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .author-name { font-size: 0.9rem; font-weight: 600; }
-    .author-role { font-size: 0.78rem; color: var(--text-sec); }
-
-    /* ─── PARA QUEM NÃO É ─────────────────────────────── */
-    #nao-para-quem { background: var(--bg2); }
-
-    .x-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .x-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 18px;
-      background: rgba(239,68,68,0.05);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 10px;
-    }
-
-    .x-icon {
-      width: 22px;
-      height: 22px;
-      background: rgba(239,68,68,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 0.7rem;
-      color: var(--red);
-      font-weight: 700;
-      margin-top: 1px;
-    }
-
-    .x-item p { font-size: 0.88rem; color: var(--text-sec); line-height: 1.5; }
-
-    /* ─── GARANTIA ────────────────────────────────────── */
-    #garantia { background: var(--bg); }
-
-    .garantia-box {
-      max-width: 560px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, var(--bg3) 100%);
-      border: 2px solid rgba(16,185,129,0.3);
-      border-radius: 20px;
-      padding: 40px 36px;
-      text-align: center;
-    }
-
-    .garantia-icon { font-size: 3.5rem; margin-bottom: 16px; }
-
-    .garantia-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 14px; color: var(--green-light); }
-
-    .garantia-text { font-size: 0.95rem; color: var(--text-sec); line-height: 1.7; }
-
-    /* ─── FAQ ─────────────────────────────────────────── */
-    #faq { background: var(--bg2); }
-
-    .faq-list {
-      max-width: 680px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    details {
-      background: var(--bg3);
+      width: 40px; height: 40px;
       border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--gold); flex-shrink: 0;
     }
+    .author-name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .author-role { font-size: 0.75rem; color: var(--text-sec); }
 
-    details[open] { border-color: var(--purple); }
+    /* ─── X LIST ─── */
+    #nao-para-quem { background: var(--bg2); }
+    .x-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; max-width: 720px; margin: 0 auto; }
+    .x-item {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      background: rgba(192,57,43,0.05); border: 1px solid rgba(192,57,43,0.2);
+      padding: 1rem 1.25rem;
+    }
+    .x-icon {
+      width: 22px; height: 22px; border: 1px solid rgba(192,57,43,0.4);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 0.7rem; color: #c0392b; font-weight: 700; margin-top: 2px;
+    }
+    .x-item p { font-size: 0.875rem; color: var(--text-sec); line-height: 1.55; }
 
+    /* ─── GARANTIA ─── */
+    .garantia-box {
+      max-width: 580px; margin: 0 auto;
+      background: var(--bg-card); border: 1px solid rgba(111,207,151,0.25);
+      padding: 2.75rem 2rem; text-align: center;
+    }
+    .garantia-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .garantia-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--green); margin-bottom: 1rem; }
+    .garantia-text { font-size: 0.9rem; color: var(--text-sec); line-height: 1.8; }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--bg2); }
+    .faq-list { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
+    details {
+      background: var(--bg-card); border: 1px solid var(--border); overflow: hidden;
+    }
+    details[open] { border-color: var(--gold); }
     summary {
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 18px 22px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      list-style: none;
-      user-select: none;
+      font-size: 0.9rem; font-weight: 600; padding: 1.1rem 1.4rem;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      list-style: none; user-select: none; color: var(--text);
     }
-
     summary::-webkit-details-marker { display: none; }
-
-    summary::after {
-      content: '+';
-      font-size: 1.3rem;
-      color: var(--purple-light);
-      flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-
+    summary::after { content: '+'; font-size: 1.2rem; color: var(--gold); flex-shrink: 0; transition: transform 0.2s; }
     details[open] summary::after { content: '−'; }
+    .faq-answer { padding: 0 1.4rem 1.1rem; font-size: 0.875rem; color: var(--text-sec); line-height: 1.75; }
 
-    .faq-answer {
-      padding: 0 22px 18px;
-      font-size: 0.88rem;
-      color: var(--text-sec);
-      line-height: 1.7;
+    /* ─── PLANS ─── */
+    #planos { background: var(--bg); }
+    .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; align-items: start; }
+    .plan-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 2rem 1.5rem; text-align: center; position: relative;
+      transition: border-color 0.3s, transform 0.3s;
     }
+    .plan-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .plan-card.featured { border-color: var(--gold); }
+    .plan-card.featured::before {
+      content: '⭐ Mais Popular';
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--bg);
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 1rem; white-space: nowrap;
+    }
+    .plan-name { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; margin-top: 0.25rem; }
+    .plan-price { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
+    .plan-price-note { font-size: 0.75rem; color: var(--text-sec); margin-bottom: 1.5rem; }
+    .plan-features { list-style: none; text-align: left; margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 0.65rem; }
+    .plan-features li { font-size: 0.825rem; color: var(--text-sec); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+    .plan-features li span.check { color: var(--gold); font-weight: 700; flex-shrink: 0; }
+    .plan-cta { display: block; width: 100%; }
+    .plan-card.fundador .plan-price { color: var(--gold); }
+    .plan-card.fundador .plan-cta { background: rgba(201,168,76,0.12); border: 1px solid var(--gold); color: var(--gold); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.85rem 1.5rem; text-align: center; transition: background 0.2s; }
+    .plan-card.fundador .plan-cta:hover { background: var(--gold); color: var(--bg); }
 
-    /* ─── CTA FINAL ───────────────────────────────────── */
+    /* ─── CTA FINAL ─── */
     #cta-final {
-      background: radial-gradient(ellipse 80% 80% at 50% 100%, rgba(99,102,241,0.2) 0%, transparent 70%);
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        var(--bg);
       text-align: center;
     }
+    .urgency-text { font-size: 0.85rem; font-weight: 500; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .cta-price { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; color: var(--gold); line-height: 1; margin: 1.5rem 0 0.5rem; }
+    .cta-price-after { font-size: 0.85rem; color: var(--text-sec); margin-bottom: 2.25rem; }
 
-    .urgency-text {
-      font-size: 1rem;
-      color: #fbbf24;
-      font-weight: 600;
-      margin-bottom: 20px;
+    /* ─── FOOTER ─── */
+    footer { background: #07070b; border-top: 1px solid var(--border); padding: 2rem 0; }
+    .footer-inner { padding: 0 1.25rem; max-width: 1100px; margin: 0 auto; text-align: center; }
+    .footer-copy { font-size: 0.75rem; color: var(--text-sec); }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (min-width: 640px) {
+      .hero-actions { flex-direction: row; justify-content: center; }
     }
-
-    .cta-price {
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--green);
-      line-height: 1;
-      margin: 20px 0 8px;
+    @media (min-width: 768px) {
+      .nav-countdown { display: flex; }
     }
-
-    .cta-price-after {
-      font-size: 0.9rem;
-      color: var(--text-sec);
-      margin-bottom: 32px;
-    }
-
-    /* ─── FOOTER ──────────────────────────────────────── */
-    footer {
-      background: var(--bg);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 24px 20px;
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 0.78rem;
-      color: rgba(148,163,184,0.5);
-    }
-
-    /* ─── RESPONSIVE ──────────────────────────────────── */
-    @media (max-width: 600px) {
-      section { padding: 60px 0; }
-      #hero { padding: 80px 0 60px; }
-      .btn-primary { font-size: 1rem; padding: 16px 28px; width: 100%; text-align: center; }
-      .preco-box { padding: 28px 20px; }
-      .garantia-box { padding: 28px 20px; }
-      #sticky-bar { gap: 8px; padding: 8px 14px; }
-      #sticky-bar .bar-text { font-size: 0.78rem; }
-      .trust-seals { gap: 12px; font-size: 0.75rem; }
+    @media (max-width: 767px) {
+      .nav-countdown { display: none; }
+      section { padding: 4rem 0; }
+      #hero { padding: 6rem 1.25rem 4rem; }
+      .preco-box { padding: 2rem 1.25rem; }
+      .garantia-box { padding: 2rem 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══ STICKY TOP BAR ═══════════════════════════════════════ -->
-<div id="sticky-bar">
-  <span class="bar-text">⚡ Preço de lançamento R$57 — termina em:</span>
-  <span id="countdown">--d --h --m --s</span>
-  <a href="https://pay.kiwify.com.br/61im3UA" class="bar-cta">Garantir agora</a>
-</div>
+<!-- ═══ NAV ════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-brand">STM <span>Digital</span></div>
+  </div>
+  <div class="nav-countdown">
+    <span>Lançamento em:</span>
+    <strong id="nav-countdown">--d --h --m --s</strong>
+  </div>
+  <a href="https://pay.kiwify.com.br/61im3UA" class="nav-cta">Garantir acesso</a>
+</nav>
 
-<main>
-
-  <!-- ═══ HERO ════════════════════════════════════════════════ -->
-  <section id="hero">
-    <div class="container">
-      <div class="badge">Lançamento · 25 de Março</div>
-      <h1>Uma Pessoa. Oito Agentes de IA.<br/>Uma Empresa Inteira.</h1>
-      <p class="subheadline">O guia completo para montar seu Panteão do Olimpo — do zero ao funcionamento em 7 dias, sem precisar saber programar.</p>
-
-      <div class="price-anchor">
-        <span class="price-original">R$197</span>
-        <span class="price-current">R$57</span>
-        <span class="price-label">hoje</span>
-      </div>
-
+<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">
+      <span class="hero-badge-dot"></span>
+      Lançamento · 25 de Março de 2026
+    </div>
+    <h1 class="hero-title fade-up delay-1">
+      Uma Pessoa. Oito Agentes de IA.<br/><span>Uma Empresa Inteira.</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      O guia completo para montar seu Panteão do Olimpo — do zero ao funcionamento em 7 dias, sem precisar saber programar.
+    </p>
+    <div class="hero-price fade-up delay-3">
+      <span class="price-original">R$197</span>
+      <span class="price-current">R$57</span>
+      <span class="price-badge">Lançamento</span>
+    </div>
+    <div class="hero-actions fade-up delay-4">
       <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary">Garantir meu acesso por R$57 →</a>
-      <p class="trust-note">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia 7 dias</p>
     </div>
-  </section>
+    <p class="trust-note fade-up delay-5">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia 7 dias</p>
+  </div>
+</section>
 
-  <!-- ═══ VÍDEO ════════════════════════════════════════════════ -->
-  <section id="video">
-    <div class="container">
-      <div class="video-wrap">
-        <p class="video-label">Assista: Como o Panteão do Olimpo funciona na prática (2 min)</p>
-        <div class="video-thumb">
-          <div class="play-btn"></div>
-        </div>
+<!-- ═══ VÍDEO ════════════════════════════════════════════════════ -->
+<section id="video">
+  <div class="container">
+    <div class="video-wrap fade-up">
+      <p class="video-label">Assista: Como o Panteão do Olimpo funciona na prática (2 min)</p>
+      <div class="video-thumb">
+        <div class="play-btn"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ PARA QUEM É ══════════════════════════════════════════ -->
-  <section id="para-quem">
-    <div class="container">
-      <h2 class="section-title">Esse e-book é <span>para você</span> se…</h2>
-      <div class="check-list">
-        <div class="check-item">
-          <div class="check-icon">✓</div>
-          <p><strong>É empreendedor</strong> e quer escalar seu negócio sem contratar uma equipe inteira</p>
-        </div>
-        <div class="check-item">
-          <div class="check-icon">✓</div>
-          <p><strong>É profissional liberal</strong> e quer multiplicar sua produtividade sem trabalhar mais horas</p>
-        </div>
-        <div class="check-item">
-          <div class="check-icon">✓</div>
-          <p><strong>É gestor ou líder</strong> e quer automatizar tarefas operacionais repetitivas do seu time</p>
-        </div>
-        <div class="check-item">
-          <div class="check-icon">✓</div>
-          <p><strong>Já usa IA superficialmente</strong> e quer ir além do ChatGPT básico para uso real no negócio</p>
-        </div>
-        <div class="check-item">
-          <div class="check-icon">✓</div>
-          <p><strong>Tem projeto pessoal ou SaaS</strong> e quer uma equipe digital operando 24h por dia</p>
-        </div>
-        <div class="check-item">
-          <div class="check-icon">✓</div>
-          <p><strong>Quer soberania tecnológica</strong> — um sistema que você controla, não depende de terceiros</p>
-        </div>
+<!-- ═══ PARA QUEM É ══════════════════════════════════════════════ -->
+<section id="para-quem">
+  <div class="container">
+    <span class="section-label fade-up">Público</span>
+    <h2 class="section-title fade-up delay-1">Esse e-book é <span>para você</span> se…</h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="check-list">
+      <div class="check-item fade-up delay-1">
+        <div class="check-icon">✓</div>
+        <p><strong>É empreendedor</strong> e quer escalar seu negócio sem contratar uma equipe inteira</p>
+      </div>
+      <div class="check-item fade-up delay-2">
+        <div class="check-icon">✓</div>
+        <p><strong>É profissional liberal</strong> e quer multiplicar sua produtividade sem trabalhar mais horas</p>
+      </div>
+      <div class="check-item fade-up delay-3">
+        <div class="check-icon">✓</div>
+        <p><strong>É gestor ou líder</strong> e quer automatizar tarefas operacionais repetitivas do seu time</p>
+      </div>
+      <div class="check-item fade-up delay-4">
+        <div class="check-icon">✓</div>
+        <p><strong>Já usa IA superficialmente</strong> e quer ir além do ChatGPT básico para uso real no negócio</p>
+      </div>
+      <div class="check-item fade-up delay-5">
+        <div class="check-icon">✓</div>
+        <p><strong>Tem projeto pessoal ou SaaS</strong> e quer uma equipe digital operando 24h por dia</p>
+      </div>
+      <div class="check-item fade-up delay-6">
+        <div class="check-icon">✓</div>
+        <p><strong>Quer soberania tecnológica</strong> — um sistema que você controla, não depende de terceiros</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ MÓDULOS ══════════════════════════════════════════════ -->
-  <section id="modulos">
-    <div class="container">
-      <h2 class="section-title">O que você vai <span>aprender</span></h2>
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-num">Módulo 1</div>
-          <div class="module-icon">🏛️</div>
-          <div class="module-title">O que é o Panteão do Olimpo</div>
-          <p class="module-desc">A fundação conceitual: como um sistema de múltiplos agentes IA coordenados funciona e por que isso é diferente de simplesmente usar o ChatGPT.</p>
-        </div>
-        <div class="module-card">
-          <div class="module-num">Módulo 2</div>
-          <div class="module-icon">⚙️</div>
-          <div class="module-title">Infraestrutura e setup do OpenClaw</div>
-          <p class="module-desc">Pré-requisitos, instalação e configuração do OpenClaw passo a passo — o ambiente onde seus agentes vão viver e operar.</p>
-        </div>
-        <div class="module-card">
-          <div class="module-num">Módulo 3</div>
-          <div class="module-icon">🤖</div>
-          <div class="module-title">Criando seus 8 agentes C-Level</div>
-          <p class="module-desc">Como definir personalidade, especialização e capacidades de cada agente: CEO, CTO, CMO, CFO, COO, CHRO, CLO e CDO.</p>
-        </div>
-        <div class="module-card">
-          <div class="module-num">Módulo 4</div>
-          <div class="module-icon">🧠</div>
-          <div class="module-title">Memória de longo prazo</div>
-          <p class="module-desc">Como criar sistemas de memória persistente para que seus agentes nunca percam o contexto — mesmo após semanas sem uso.</p>
-        </div>
-        <div class="module-card">
-          <div class="module-num">Módulo 5</div>
-          <div class="module-icon">🔗</div>
-          <div class="module-title">Integrações: Telegram, Notion, Drive e Trello</div>
-          <p class="module-desc">Conecte seus agentes às ferramentas que você já usa. Delegue por mensagem e receba entregas completas no Notion ou Drive.</p>
-        </div>
-        <div class="module-card">
-          <div class="module-num">Módulo 6</div>
-          <div class="module-icon">🚀</div>
-          <div class="module-title">Delegação e automações avançadas</div>
-          <p class="module-desc">Heartbeats automáticos, sub-agentes, fluxos de delegação e como fazer seu Panteão trabalhar enquanto você dorme.</p>
-        </div>
+<!-- ═══ MÓDULOS ══════════════════════════════════════════════════ -->
+<section id="modulos">
+  <div class="container">
+    <span class="section-label fade-up">Conteúdo</span>
+    <h2 class="section-title fade-up delay-1">O que você vai <span>aprender</span></h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="modules-grid">
+      <div class="module-card fade-up delay-1">
+        <div class="module-num">Módulo 01</div>
+        <div class="module-icon">🏛️</div>
+        <div class="module-title">O que é o Panteão do Olimpo</div>
+        <p class="module-desc">A fundação conceitual: como um sistema de múltiplos agentes IA coordenados funciona e por que isso é diferente de simplesmente usar o ChatGPT.</p>
+      </div>
+      <div class="module-card fade-up delay-2">
+        <div class="module-num">Módulo 02</div>
+        <div class="module-icon">⚙️</div>
+        <div class="module-title">Infraestrutura e setup do OpenClaw</div>
+        <p class="module-desc">Pré-requisitos, instalação e configuração do OpenClaw passo a passo — o ambiente onde seus agentes vão viver e operar.</p>
+      </div>
+      <div class="module-card fade-up delay-3">
+        <div class="module-num">Módulo 03</div>
+        <div class="module-icon">🤖</div>
+        <div class="module-title">Criando seus 8 agentes C-Level</div>
+        <p class="module-desc">Como definir personalidade, especialização e capacidades de cada agente: CEO, CTO, CMO, CFO, COO, CHRO, CLO e CDO.</p>
+      </div>
+      <div class="module-card fade-up delay-4">
+        <div class="module-num">Módulo 04</div>
+        <div class="module-icon">🧠</div>
+        <div class="module-title">Memória de longo prazo</div>
+        <p class="module-desc">Como criar sistemas de memória persistente para que seus agentes nunca percam o contexto — mesmo após semanas sem uso.</p>
+      </div>
+      <div class="module-card fade-up delay-5">
+        <div class="module-num">Módulo 05</div>
+        <div class="module-icon">🔗</div>
+        <div class="module-title">Integrações: Telegram, Notion, Drive e Trello</div>
+        <p class="module-desc">Conecte seus agentes às ferramentas que você já usa. Delegue por mensagem e receba entregas completas no Notion ou Drive.</p>
+      </div>
+      <div class="module-card fade-up delay-6">
+        <div class="module-num">Módulo 06</div>
+        <div class="module-icon">🚀</div>
+        <div class="module-title">Delegação e automações avançadas</div>
+        <p class="module-desc">Heartbeats automáticos, sub-agentes, fluxos de delegação e como fazer seu Panteão trabalhar enquanto você dorme.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ BÔNUS ════════════════════════════════════════════════ -->
-  <section id="bonus">
-    <div class="container">
-      <h2 class="section-title">Bônus <span>incluídos</span></h2>
-      <div class="bonus-grid">
-        <div class="bonus-card">
-          <div class="bonus-icon">📋</div>
-          <div class="bonus-title">Templates de SOUL.md</div>
-          <p class="bonus-desc">Arquivos de personalidade prontos para cada um dos 8 agentes C-Level. Copie, cole e adapte para o seu negócio.</p>
-          <span class="bonus-value">Valor: R$97</span>
-        </div>
-        <div class="bonus-card">
-          <div class="bonus-icon">✅</div>
-          <div class="bonus-title">Checklist de setup em 7 dias</div>
-          <p class="bonus-desc">Um roteiro dia a dia para você ter seu Panteão completamente operacional em uma semana. Sem enrolação.</p>
-          <span class="bonus-value">Valor: R$47</span>
-        </div>
-        <div class="bonus-card">
-          <div class="bonus-icon">💬</div>
-          <div class="bonus-title">Grupo de fundadores no Telegram</div>
-          <p class="bonus-desc">Acesso ao grupo exclusivo de quem comprou na fase de lançamento. Tire dúvidas, compartilhe resultados e evolua junto.</p>
-          <span class="bonus-value">Valor: R$197</span>
-        </div>
+<!-- ═══ BÔNUS ════════════════════════════════════════════════════ -->
+<section id="bonus">
+  <div class="container">
+    <span class="section-label fade-up">Exclusivo</span>
+    <h2 class="section-title fade-up delay-1">Bônus <span>incluídos</span></h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="bonus-grid">
+      <div class="bonus-card fade-up delay-1">
+        <div class="bonus-icon">📋</div>
+        <div class="bonus-title">Templates de SOUL.md</div>
+        <p class="bonus-desc">Arquivos de personalidade prontos para cada um dos 8 agentes C-Level. Copie, cole e adapte para o seu negócio.</p>
+        <span class="bonus-value">Valor: R$97</span>
+      </div>
+      <div class="bonus-card fade-up delay-2">
+        <div class="bonus-icon">✅</div>
+        <div class="bonus-title">Checklist de setup em 7 dias</div>
+        <p class="bonus-desc">Um roteiro dia a dia para você ter seu Panteão completamente operacional em uma semana. Sem enrolação.</p>
+        <span class="bonus-value">Valor: R$47</span>
+      </div>
+      <div class="bonus-card fade-up delay-3">
+        <div class="bonus-icon">💬</div>
+        <div class="bonus-title">Grupo de fundadores no Telegram</div>
+        <p class="bonus-desc">Acesso ao grupo exclusivo de quem comprou na fase de lançamento. Tire dúvidas, compartilhe resultados e evolua junto.</p>
+        <span class="bonus-value">Valor: R$197</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ ANCORAGEM DE PREÇO ═══════════════════════════════════ -->
-  <section id="preco">
-    <div class="container">
-      <h2 class="section-title" style="margin-bottom:32px;">Valor <span>total vs. preço de lançamento</span></h2>
-      <div class="preco-box">
-        <div class="preco-label">🔥 Oferta de lançamento</div>
-        <div class="preco-row"><span class="label">E-book completo (6 módulos)</span><span class="value strike">R$147</span></div>
-        <div class="preco-row"><span class="label">Templates SOUL.md</span><span class="value strike">R$97</span></div>
-        <div class="preco-row"><span class="label">Checklist 7 dias</span><span class="value strike">R$47</span></div>
-        <div class="preco-row"><span class="label">Grupo de fundadores</span><span class="value strike">R$197</span></div>
-        <hr class="preco-divider" />
-        <div class="preco-row"><span class="label">Valor total</span><span class="value strike">R$488</span></div>
-        <div class="preco-row"><span class="label">Desconto de lançamento</span><span class="value discount">− R$431</span></div>
-        <hr class="preco-divider" />
-        <div class="preco-row"><span class="label" style="font-weight:700;color:var(--text)">Preço hoje</span><span class="value total">R$57</span></div>
-
-        <br />
-        <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary" style="width:100%;display:block;text-align:center;">Garantir meu acesso por R$57 →</a>
-        <p class="preco-after">Após o lançamento (01/04): R$97</p>
-        <div class="trust-seals">
-          <span>🔒 Pagamento seguro</span>
-          <span>✅ Acesso imediato</span>
-          <span>💰 Garantia 7 dias</span>
-        </div>
+<!-- ═══ ANCORAGEM DE PREÇO ═══════════════════════════════════════ -->
+<section id="preco">
+  <div class="container">
+    <span class="section-label fade-up">Investimento</span>
+    <h2 class="section-title fade-up delay-1">Valor total vs. <span>preço de lançamento</span></h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="preco-box fade-up delay-3">
+      <div class="preco-label">🔥 Oferta de lançamento</div>
+      <div class="preco-row"><span class="label">E-book completo (6 módulos)</span><span class="value strike">R$147</span></div>
+      <div class="preco-row"><span class="label">Templates SOUL.md</span><span class="value strike">R$97</span></div>
+      <div class="preco-row"><span class="label">Checklist 7 dias</span><span class="value strike">R$47</span></div>
+      <div class="preco-row"><span class="label">Grupo de fundadores</span><span class="value strike">R$197</span></div>
+      <hr class="preco-divider" />
+      <div class="preco-row"><span class="label">Valor total</span><span class="value strike">R$488</span></div>
+      <div class="preco-row"><span class="label">Desconto de lançamento</span><span class="value discount">− R$431</span></div>
+      <hr class="preco-divider" />
+      <div class="preco-row"><span class="label" style="font-weight:600;color:var(--text)">Preço hoje</span><span class="value total">R$57</span></div>
+      <br/>
+      <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary" style="display:block;width:100%;text-align:center;">Garantir meu acesso por R$57 →</a>
+      <p style="font-size:0.78rem;color:var(--text-sec);margin-top:0.85rem;">Após o lançamento (01/04): R$97</p>
+      <div class="trust-seals">
+        <span>🔒 Pagamento seguro</span>
+        <span>✅ Acesso imediato</span>
+        <span>💰 Garantia 7 dias</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ DEPOIMENTOS ══════════════════════════════════════════ -->
-  <section id="depoimentos">
-    <div class="container">
-      <h2 class="section-title">O que estão <span>dizendo</span></h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-quote">"Reduzi 60% do tempo operacional em apenas 2 semanas. Hoje minha equipe de agentes cuida de briefing, proposta, follow-up e relatório. Eu só aprovo."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">A</div>
-            <div>
-              <div class="author-name">Ana Paula M.</div>
-              <div class="author-role">CEO de agência de marketing digital</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-quote">"É como ter um time de diretores trabalhando 24h por dia. Acordei segunda-feira com um relatório de mercado, uma proposta e 3 e-mails respondidos — tudo feito pelos agentes no fim de semana."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">R</div>
-            <div>
-              <div class="author-name">Ricardo F.</div>
-              <div class="author-role">Consultor B2B</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-quote">"Nunca imaginei que seria tão simples configurar. Segui o passo a passo, e em 5 dias meu agente de marketing já estava gerando copies e calendários de conteúdo."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">F</div>
-            <div>
-              <div class="author-name">Fernanda R.</div>
-              <div class="author-role">Empreendedora digital</div>
-            </div>
+<!-- ═══ DEPOIMENTOS ══════════════════════════════════════════════ -->
+<section id="depoimentos">
+  <div class="container">
+    <span class="section-label fade-up">Social Proof</span>
+    <h2 class="section-title fade-up delay-1">O que estão <span>dizendo</span></h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up delay-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Reduzi 60% do tempo operacional em apenas 2 semanas. Hoje minha equipe de agentes cuida de briefing, proposta, follow-up e relatório. Eu só aprovo."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Ana Paula M.</div>
+            <div class="author-role">CEO de agência de marketing digital</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ PARA QUEM NÃO É ══════════════════════════════════════ -->
-  <section id="nao-para-quem">
-    <div class="container">
-      <h2 class="section-title">Esse e-book <span style="color:var(--red)">NÃO</span> é para você se…</h2>
-      <div class="x-list">
-        <div class="x-item">
-          <div class="x-icon">✗</div>
-          <p>Você quer resultado imediato sem dedicar nenhum esforço de configuração inicial</p>
+      <div class="testimonial-card fade-up delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"É como ter um time de diretores trabalhando 24h por dia. Acordei segunda-feira com um relatório de mercado, uma proposta e 3 e-mails respondidos — tudo feito pelos agentes no fim de semana."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Ricardo F.</div>
+            <div class="author-role">Consultor B2B</div>
+          </div>
         </div>
-        <div class="x-item">
-          <div class="x-icon">✗</div>
-          <p>Você não tem nenhum negócio, projeto ou objetivo claro para os agentes trabalharem</p>
-        </div>
-        <div class="x-item">
-          <div class="x-icon">✗</div>
-          <p>Você quer apenas mais um produto digital para colecionar na gaveta sem aplicar</p>
-        </div>
-        <div class="x-item">
-          <div class="x-icon">✗</div>
-          <p>Você está procurando uma solução 100% plug-and-play que não exige nenhuma personalização</p>
+      </div>
+      <div class="testimonial-card fade-up delay-3">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Nunca imaginei que seria tão simples configurar. Segui o passo a passo, e em 5 dias meu agente de marketing já estava gerando copies e calendários de conteúdo."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">F</div>
+          <div>
+            <div class="author-name">Fernanda R.</div>
+            <div class="author-role">Empreendedora digital</div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ GARANTIA ═════════════════════════════════════════════ -->
-  <section id="garantia">
-    <div class="container">
-      <div class="garantia-box">
-        <div class="garantia-icon">🛡️</div>
-        <div class="garantia-title">Garantia incondicional de 7 dias</div>
-        <p class="garantia-text">Se você não ficar satisfeito por qualquer motivo — ou sem nenhum motivo — devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia, sem demora.</p>
+<!-- ═══ PARA QUEM NÃO É ══════════════════════════════════════════ -->
+<section id="nao-para-quem">
+  <div class="container">
+    <span class="section-label fade-up">Honestidade</span>
+    <h2 class="section-title fade-up delay-1">Esse e-book <span class="danger">NÃO</span> é para você se…</h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="x-list">
+      <div class="x-item fade-up delay-1">
+        <div class="x-icon">✗</div>
+        <p>Você quer resultado imediato sem dedicar nenhum esforço de configuração inicial</p>
+      </div>
+      <div class="x-item fade-up delay-2">
+        <div class="x-icon">✗</div>
+        <p>Você não tem nenhum negócio, projeto ou objetivo claro para os agentes trabalharem</p>
+      </div>
+      <div class="x-item fade-up delay-3">
+        <div class="x-icon">✗</div>
+        <p>Você quer apenas mais um produto digital para colecionar na gaveta sem aplicar</p>
+      </div>
+      <div class="x-item fade-up delay-4">
+        <div class="x-icon">✗</div>
+        <p>Você está procurando uma solução 100% plug-and-play que não exige nenhuma personalização</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ FAQ ══════════════════════════════════════════════════ -->
-  <section id="faq">
-    <div class="container">
-      <h2 class="section-title">Perguntas <span>frequentes</span></h2>
-      <div class="faq-list">
-        <details>
-          <summary>Preciso saber programar?</summary>
-          <div class="faq-answer">Não. O e-book foi escrito para pessoas sem conhecimento técnico em programação. O OpenClaw tem uma interface de texto simples — você configura tudo por mensagens.</div>
-        </details>
-        <details>
-          <summary>Funciona para qualquer tipo de negócio?</summary>
-          <div class="faq-answer">Sim. O sistema de agentes é adaptável a qualquer vertical: agências, consultorias, e-commerce, infoprodutos, SaaS, escritórios, clínicas e mais. Os templates incluídos cobrem os casos mais comuns.</div>
-        </details>
-        <details>
-          <summary>Como recebo após a compra?</summary>
-          <div class="faq-answer">Acesso imediato. Assim que o pagamento é confirmado você recebe um e-mail da Kiwify com o link para baixar o PDF e acessar todos os bônus.</div>
-        </details>
-        <details>
-          <summary>E se eu tiver dúvidas durante a implementação?</summary>
-          <div class="faq-answer">Você terá acesso ao grupo exclusivo de fundadores no Telegram, onde pode tirar dúvidas diretamente com a equipe STM e com outros usuários que já implementaram o sistema.</div>
-        </details>
-        <details>
-          <summary>Qual a diferença do preço de lançamento?</summary>
-          <div class="faq-answer">O preço de R$57 é válido apenas durante os 7 dias de lançamento (25/03 a 01/04/2026). Após esse período, o valor sobe para R$97 e não haverá novo desconto.</div>
-        </details>
-        <details>
-          <summary>O conteúdo fica desatualizado?</summary>
-          <div class="faq-answer">Não. Compradores recebem todas as atualizações futuras do e-book gratuitamente. O conteúdo é revisado toda vez que o OpenClaw lança uma versão relevante.</div>
-        </details>
-        <details>
-          <summary>Funciona no celular?</summary>
-          <div class="faq-answer">Sim. O e-book está disponível em PDF (leitura em qualquer dispositivo) e o OpenClaw pode ser controlado inteiramente pelo Telegram — inclusive pelo celular.</div>
-        </details>
-        <details>
-          <summary>Como funciona a garantia?</summary>
-          <div class="faq-answer">7 dias a partir da compra, 100% do valor devolvido, sem perguntas. Basta enviar um e-mail para suporte@stmgroup.com.br ou uma mensagem no grupo de fundadores.</div>
-        </details>
+<!-- ═══ GARANTIA ════════════════════════════════════════════════ -->
+<section id="garantia">
+  <div class="container">
+    <div class="garantia-box fade-up">
+      <div class="garantia-icon">🛡️</div>
+      <div class="garantia-title">Garantia incondicional de 7 dias</div>
+      <p class="garantia-text">Se você não ficar satisfeito por qualquer motivo — ou sem nenhum motivo — devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia, sem demora.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══════════════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-label fade-up">Dúvidas</span>
+    <h2 class="section-title fade-up delay-1">Perguntas <span>frequentes</span></h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <div class="faq-list fade-up delay-3">
+      <details>
+        <summary>Preciso saber programar?</summary>
+        <div class="faq-answer">Não. O e-book foi escrito para pessoas sem conhecimento técnico em programação. O OpenClaw tem uma interface de texto simples — você configura tudo por mensagens.</div>
+      </details>
+      <details>
+        <summary>Funciona para qualquer tipo de negócio?</summary>
+        <div class="faq-answer">Sim. O sistema de agentes é adaptável a qualquer vertical: agências, consultorias, e-commerce, infoprodutos, SaaS, escritórios, clínicas e mais. Os templates incluídos cobrem os casos mais comuns.</div>
+      </details>
+      <details>
+        <summary>Como recebo após a compra?</summary>
+        <div class="faq-answer">Acesso imediato. Assim que o pagamento é confirmado você recebe um e-mail da Kiwify com o link para baixar o PDF e acessar todos os bônus.</div>
+      </details>
+      <details>
+        <summary>E se eu tiver dúvidas durante a implementação?</summary>
+        <div class="faq-answer">Você terá acesso ao grupo exclusivo de fundadores no Telegram, onde pode tirar dúvidas diretamente com a equipe STM e com outros usuários que já implementaram o sistema.</div>
+      </details>
+      <details>
+        <summary>Qual a diferença do preço de lançamento?</summary>
+        <div class="faq-answer">O preço de R$57 é válido apenas durante os 7 dias de lançamento (25/03 a 01/04/2026). Após esse período, o valor sobe para R$97 e não haverá novo desconto.</div>
+      </details>
+      <details>
+        <summary>O conteúdo fica desatualizado?</summary>
+        <div class="faq-answer">Não. Compradores recebem todas as atualizações futuras do e-book gratuitamente. O conteúdo é revisado toda vez que o OpenClaw lança uma versão relevante.</div>
+      </details>
+      <details>
+        <summary>Funciona no celular?</summary>
+        <div class="faq-answer">Sim. O e-book está disponível em PDF (leitura em qualquer dispositivo) e o OpenClaw pode ser controlado inteiramente pelo Telegram — inclusive pelo celular.</div>
+      </details>
+      <details>
+        <summary>Como funciona a garantia?</summary>
+        <div class="faq-answer">7 dias a partir da compra, 100% do valor devolvido, sem perguntas. Basta enviar um e-mail para suporte@stmgroup.com.br ou uma mensagem no grupo de fundadores.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PLANOS ═══════════════════════════════════════════════════ -->
+<section id="planos">
+  <div class="container">
+    <span class="section-label fade-up">Planos</span>
+    <h2 class="section-title fade-up delay-1">Escolha o seu <span>plano</span></h2>
+    <div class="gold-rule fade-up delay-2"></div>
+    <p class="section-intro fade-up delay-3">Todos incluem acesso imediato, garantia de 7 dias e atualizações gratuitas.</p>
+    <div class="plans-grid">
+
+      <!-- STARTER -->
+      <div class="plan-card fade-up delay-1">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">R$57</div>
+        <div class="plan-price-note">pagamento único</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> E-book completo (6 módulos)</li>
+          <li><span class="check">✓</span> Checklist de setup em 7 dias</li>
+          <li><span class="check">✓</span> Acesso ao grupo de fundadores</li>
+        </ul>
+        <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary plan-cta">Começar por R$57 →</a>
       </div>
-    </div>
-  </section>
 
-  <!-- ═══ PLANOS ══════════════════════════════════════════════ -->
-  <section id="planos" style="background: var(--bg2);">
-    <div class="container">
-      <h2 class="section-title">Escolha o seu <span>plano</span></h2>
-      <p style="text-align:center; color:var(--text-sec); margin-bottom:48px; font-size:0.95rem;">Todos incluem acesso imediato, garantia de 7 dias e atualizações gratuitas.</p>
-
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:20px; align-items:start;">
-
-        <!-- STARTER -->
-        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:20px; padding:32px 24px; text-align:center;">
-          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-sec); margin-bottom:12px;">STARTER</div>
-          <div style="font-size:2.4rem; font-weight:900; color:var(--green); line-height:1; margin-bottom:4px;">R$57</div>
-          <div style="font-size:0.8rem; color:var(--text-sec); margin-bottom:24px;">pagamento único</div>
-          <ul style="list-style:none; text-align:left; margin-bottom:28px; display:flex; flex-direction:column; gap:10px;">
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> E-book completo (6 módulos)</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Checklist de setup em 7 dias</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Acesso ao grupo de fundadores</li>
-          </ul>
-          <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary" style="display:block; font-size:0.9rem; padding:14px 20px;">Começar por R$57 →</a>
-        </div>
-
-        <!-- PRO — MAIS POPULAR -->
-        <div style="background:var(--bg3); border:2px solid var(--purple); border-radius:20px; padding:32px 24px; text-align:center; position:relative; box-shadow: 0 0 40px rgba(99,102,241,0.2);">
-          <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--purple); color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:5px 16px; border-radius:100px; white-space:nowrap;">⭐ Mais Popular</div>
-          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--purple-light); margin-bottom:12px; margin-top:8px;">PRO</div>
-          <div style="font-size:2.4rem; font-weight:900; color:var(--green); line-height:1; margin-bottom:4px;">R$97</div>
-          <div style="font-size:0.8rem; color:var(--text-sec); margin-bottom:24px;">pagamento único</div>
-          <ul style="list-style:none; text-align:left; margin-bottom:28px; display:flex; flex-direction:column; gap:10px;">
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Tudo do Starter</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Pack de Templates SOUL.md</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Templates prontos para 8 agentes</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Suporte prioritário no grupo</li>
-          </ul>
-          <a href="https://pay.kiwify.com.br/dDsfO8g" class="btn-primary" style="display:block; font-size:0.9rem; padding:14px 20px;">Garantir PRO por R$97 →</a>
-        </div>
-
-        <!-- VIP -->
-        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:20px; padding:32px 24px; text-align:center;">
-          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-sec); margin-bottom:12px;">VIP</div>
-          <div style="font-size:2.4rem; font-weight:900; color:var(--green); line-height:1; margin-bottom:4px;">R$197</div>
-          <div style="font-size:0.8rem; color:var(--text-sec); margin-bottom:24px;">pagamento único</div>
-          <ul style="list-style:none; text-align:left; margin-bottom:28px; display:flex; flex-direction:column; gap:10px;">
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Tudo do Pro</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Webinar ao vivo de implementação</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Gravação do webinar (acesso vitalício)</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Sessão de Q&A exclusiva</li>
-          </ul>
-          <a href="https://pay.kiwify.com.br/2kdTInq" class="btn-primary" style="display:block; font-size:0.9rem; padding:14px 20px;">Garantir VIP por R$197 →</a>
-        </div>
-
-        <!-- FUNDADOR -->
-        <div style="background:var(--bg3); border:1px solid rgba(251,191,36,0.35); border-radius:20px; padding:32px 24px; text-align:center;">
-          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#fbbf24; margin-bottom:12px;">FUNDADOR</div>
-          <div style="font-size:2.4rem; font-weight:900; color:var(--green); line-height:1; margin-bottom:4px;">R$497</div>
-          <div style="font-size:0.8rem; color:var(--text-sec); margin-bottom:24px;">pagamento único</div>
-          <ul style="list-style:none; text-align:left; margin-bottom:28px; display:flex; flex-direction:column; gap:10px;">
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Tudo do VIP</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Comunidade privada de Fundadores</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Acesso vitalício a todas as versões</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Mentorias em grupo mensais</li>
-            <li style="font-size:0.85rem; color:var(--text-sec); display:flex; gap:8px; align-items:flex-start;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">✓</span> Badge exclusivo de Fundador 🏛️</li>
-          </ul>
-          <a href="https://pay.kiwify.com.br/OefFJhT" class="btn-primary" style="display:block; font-size:0.9rem; padding:14px 20px; background:linear-gradient(135deg,#b45309,#d97706);">Ser Fundador por R$497 →</a>
-        </div>
-
+      <!-- PRO -->
+      <div class="plan-card featured fade-up delay-2">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">R$97</div>
+        <div class="plan-price-note">pagamento único</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Tudo do Starter</li>
+          <li><span class="check">✓</span> Pack de Templates SOUL.md</li>
+          <li><span class="check">✓</span> Templates prontos para 8 agentes</li>
+          <li><span class="check">✓</span> Suporte prioritário no grupo</li>
+        </ul>
+        <a href="https://pay.kiwify.com.br/dDsfO8g" class="btn-primary plan-cta">Garantir PRO por R$97 →</a>
       </div>
+
+      <!-- VIP -->
+      <div class="plan-card fade-up delay-3">
+        <div class="plan-name">VIP</div>
+        <div class="plan-price">R$197</div>
+        <div class="plan-price-note">pagamento único</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Tudo do Pro</li>
+          <li><span class="check">✓</span> Webinar ao vivo de implementação</li>
+          <li><span class="check">✓</span> Gravação do webinar (acesso vitalício)</li>
+          <li><span class="check">✓</span> Sessão de Q&A exclusiva</li>
+        </ul>
+        <a href="https://pay.kiwify.com.br/2kdTInq" class="btn-primary plan-cta">Garantir VIP por R$197 →</a>
+      </div>
+
+      <!-- FUNDADOR -->
+      <div class="plan-card fundador fade-up delay-4">
+        <div class="plan-name">Fundador</div>
+        <div class="plan-price">R$497</div>
+        <div class="plan-price-note">pagamento único</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Tudo do VIP</li>
+          <li><span class="check">✓</span> Comunidade privada de Fundadores</li>
+          <li><span class="check">✓</span> Acesso vitalício a todas as versões</li>
+          <li><span class="check">✓</span> Mentorias em grupo mensais</li>
+          <li><span class="check">✓</span> Badge exclusivo de Fundador 🏛️</li>
+        </ul>
+        <a href="https://pay.kiwify.com.br/OefFJhT" class="plan-cta">Ser Fundador por R$497 →</a>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ CTA FINAL ════════════════════════════════════════════ -->
-  <section id="cta-final">
-    <div class="container" style="text-align:center;">
-      <p class="urgency-text" id="urgency-days">⏰ Faltam 10 dias com preço de R$57</p>
-      <h2 class="section-title" style="margin-bottom:8px;">Comece a construir seu<br/><span>Panteão hoje</span></h2>
-      <div class="cta-price">R$57</div>
-      <p class="cta-price-after">Depois do lançamento: R$97</p>
-      <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary" style="font-size:1.15rem;padding:20px 44px;">Garantir meu acesso agora →</a>
-      <p class="trust-note" style="margin-top:20px;">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia 7 dias</p>
-    </div>
-  </section>
+<!-- ═══ CTA FINAL ════════════════════════════════════════════════ -->
+<section id="cta-final">
+  <div class="container">
+    <span class="section-label fade-up">Última chamada</span>
+    <p class="urgency-text fade-up delay-1" id="urgency-days">⏰ Faltam 10 dias com preço de R$57</p>
+    <h2 class="section-title fade-up delay-2">Comece a construir seu<br/><span>Panteão hoje</span></h2>
+    <div class="cta-price fade-up delay-3">R$57</div>
+    <p class="cta-price-after fade-up delay-4">Após o lançamento (01/04): R$97</p>
+    <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary fade-up delay-5" style="font-size:0.8rem;padding:1.1rem 2.5rem;letter-spacing:0.12em;">Garantir meu acesso agora →</a>
+    <p class="trust-note fade-up delay-6" style="margin-top:1rem;">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia 7 dias</p>
+  </div>
+</section>
 
-</main>
-
+<!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
 <footer>
-  <p>© 2026 STM Digital · STM Group. Todos os direitos reservados.</p>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 STM Digital · STM Group. Todos os direitos reservados.</p>
+  </div>
 </footer>
 
 <script>
-  // ─── Countdown ───────────────────────────────────────────────
-  // Target: 25/03/2026 10:00 BRT (UTC-3 = 13:00 UTC)
-  const target = new Date('2026-03-25T13:00:00Z');
-
+  // ─── Countdown ────────────────────────────────────────────────
+  const target = new Date('2026-03-25T13:00:00Z'); // 10h BRT = 13h UTC
   function pad(n) { return String(n).padStart(2, '0'); }
 
   function updateCountdown() {
     const now = new Date();
     const diff = target - now;
+    const navEl = document.getElementById('nav-countdown');
+    const urgencyEl = document.getElementById('urgency-days');
 
     if (diff <= 0) {
-      document.getElementById('countdown').textContent = 'Disponível agora!';
-      document.getElementById('urgency-days').textContent = '🔥 Preço de lançamento R$57 ativo!';
+      if (navEl) navEl.textContent = 'Disponível agora!';
+      if (urgencyEl) urgencyEl.textContent = '🔥 Preço de lançamento R$57 ativo!';
       return;
     }
 
@@ -1021,28 +773,25 @@
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins  = Math.floor((diff % 3600000) / 60000);
     const secs  = Math.floor((diff % 60000) / 1000);
+    const str   = `${pad(days)}d ${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
 
-    document.getElementById('countdown').textContent =
-      `${pad(days)}d ${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
-
-    // Urgency days text
-    const urgencyEl = document.getElementById('urgency-days');
+    if (navEl) navEl.textContent = str;
     if (urgencyEl) {
-      if (days === 0) {
-        urgencyEl.textContent = '⏰ Últimas horas com preço de R$57!';
-      } else {
-        urgencyEl.textContent = `⏰ Faltam ${days} dia${days > 1 ? 's' : ''} com preço de R$57`;
-      }
+      urgencyEl.textContent = days === 0
+        ? '⏰ Últimas horas com preço de R$57!'
+        : `⏰ Faltam ${days} dia${days > 1 ? 's' : ''} com preço de R$57`;
     }
   }
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // ─── Smooth scroll for CTA clicks ───────────────────────────
-  document.querySelectorAll('a[href="#"]').forEach(a => {
-    a.addEventListener('click', e => e.preventDefault());
-  });
+  // ─── Fade-up Observer ─────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 </body>
