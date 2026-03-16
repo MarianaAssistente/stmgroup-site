@@ -402,7 +402,7 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
       <span class="price-badge" style="font-size:1rem;padding:0.4rem 1.2rem;">🗓️ Lançamento: 25 de Março de 2026</span>
     </div>
     <div class="hero-actions fade-up delay-4">
-      <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">Quero ser avisado no lançamento →</a>
+      <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">Entrar na Lista VIP 🚀</a>
     </div>
     <p class="trust-note fade-up delay-5">✨ Garanta seu acesso antecipado &nbsp;·&nbsp; Lista exclusiva de fundadores</p>
   </div>
@@ -539,16 +539,28 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
     <div class="gold-rule fade-up delay-2"></div>
     <p class="section-intro fade-up delay-3">O Panteão Digital abre no dia <strong>25/03/2026</strong>. Inscreva-se na lista exclusiva de fundadores e seja notificado assim que as portas abrirem.</p>
     <div class="preco-box fade-up delay-4" style="max-width:480px;margin:0 auto;text-align:left;">
-      <div class="preco-label">🏛️ Lista exclusiva de fundadores</div>
+      <div class="preco-label">🏛️ Lista VIP — Lançamento 25/03/2026</div>
       <form id="waitlist-form" style="display:flex;flex-direction:column;gap:0.85rem;margin-top:1rem;">
-        <input type="text" id="wl-nome" placeholder="Seu nome (opcional)" style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
-        <input type="email" id="wl-email" placeholder="Seu melhor e-mail *" required style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.5);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
-        <button type="submit" class="btn-primary" style="width:100%;cursor:pointer;border:none;">Quero ser avisado no lançamento →</button>
+        <input type="text" name="nome" id="wl-nome" placeholder="Seu nome *" required style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
+        <input type="email" name="email" id="wl-email" placeholder="Seu melhor e-mail *" required style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.5);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
+        <input type="tel" name="whatsapp" id="wl-whatsapp" placeholder="WhatsApp (opcional)" style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
+        <input type="hidden" name="_subject" value="Novo lead — Lista VIP Panteão Digital" />
+        <input type="hidden" name="_next" value="https://stmgroup.com.br/panteao.html?sucesso=1" />
+        <button type="submit" class="btn-primary" style="width:100%;cursor:pointer;border:none;">Entrar na Lista VIP 🚀</button>
       </form>
       <div id="waitlist-success" style="display:none;text-align:center;padding:1.5rem;color:var(--gold);">
-        <div style="font-size:2rem;margin-bottom:0.5rem;">🏛️</div>
-        <strong>Você está na lista!</strong><br/>
-        <span style="font-size:0.9rem;color:var(--text-sec);">Te avisamos no dia 25/03. Fique de olho no seu e-mail.</span>
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🚀</div>
+        <strong>Você está na lista VIP!</strong><br/>
+        <span style="font-size:0.9rem;color:var(--text-sec);">Te avisamos no dia 25/03. 🚀</span>
+      </div>
+      <!-- WhatsApp Group Button -->
+      <div style="margin-top:1.25rem;text-align:center;">
+        <a href="https://chat.whatsapp.com/GSvVX3udhb70TiMqw1igbn" target="_blank" rel="noopener noreferrer"
+          style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.8rem 1.5rem;border-radius:6px;border:1px solid #25D366;color:#25D366;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;transition:background 0.2s,color 0.2s;text-decoration:none;"
+          onmouseover="this.style.background='rgba(37,211,102,0.12)'" onmouseout="this.style.background='transparent'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Entrar no Grupo do WhatsApp →
+        </a>
       </div>
       <p style="font-size:0.78rem;color:var(--text-sec);margin-top:0.85rem;text-align:center;">✨ Sem spam. Apenas o aviso de lançamento.</p>
     </div>
@@ -747,7 +759,7 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
     <span class="section-label fade-up">Não fique de fora</span>
     <p class="urgency-text fade-up delay-1" id="urgency-days">🗓️ Lançamento em 25/03/2026</p>
     <h2 class="section-title fade-up delay-2">Garanta seu lugar na<br/><span>lista de fundadores</span></h2>
-    <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary fade-up delay-4" style="font-size:0.8rem;padding:1.1rem 2.5rem;letter-spacing:0.12em;">Quero ser avisado no lançamento →</a>
+    <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary fade-up delay-4" style="font-size:0.8rem;padding:1.1rem 2.5rem;letter-spacing:0.12em;">Entrar na Lista VIP 🚀</a>
     <p class="trust-note fade-up delay-5" style="margin-top:1rem;">✨ Gratuito entrar na lista &nbsp;·&nbsp; Sem spam &nbsp;·&nbsp; Aviso apenas no dia 25/03</p>
   </div>
 </section>
@@ -807,17 +819,18 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
       e.preventDefault();
       const nome = document.getElementById('wl-nome').value.trim();
       const email = document.getElementById('wl-email').value.trim();
-      if (!email) return;
+      const whatsapp = document.getElementById('wl-whatsapp').value.trim();
+      if (!email || !nome) return;
       const btn = wlForm.querySelector('button[type="submit"]');
-      btn.textContent = 'Entrando na lista...';
+      btn.textContent = 'Entrando na lista VIP...';
       btn.disabled = true;
       try {
         await fetch('https://relay.stmgroup.com.br/waitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nome, email })
+          body: JSON.stringify({ nome, email, whatsapp })
         });
-      } catch(err) { /* API offline — silently ignore, UX still confirms */ }
+      } catch(err) { /* silently ignore network errors, UX still confirms */ }
       wlForm.style.display = 'none';
       document.getElementById('waitlist-success').style.display = 'block';
     });
