@@ -380,7 +380,7 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
     <span>Lançamento em:</span>
     <strong id="nav-countdown">--d --h --m --s</strong>
   </div>
-  <a href="https://pay.kiwify.com.br/61im3UA" class="nav-cta">Garantir acesso</a>
+  <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="nav-cta">Entrar na Lista de Espera</a>
 </nav>
 
 <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
@@ -399,14 +399,12 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
       O guia completo para montar seu Panteão do Olimpo — do zero ao funcionamento em 7 dias, sem precisar saber programar.
     </p>
     <div class="hero-price fade-up delay-3">
-      <span class="price-original">R$197</span>
-      <span class="price-current">R$57</span>
-      <span class="price-badge">Lançamento</span>
+      <span class="price-badge" style="font-size:1rem;padding:0.4rem 1.2rem;">🗓️ Lançamento: 25 de Março de 2026</span>
     </div>
     <div class="hero-actions fade-up delay-4">
-      <a href="#planos" onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">Garantir meu acesso por R$57 →</a>
+      <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">Quero ser avisado no lançamento →</a>
     </div>
-    <p class="trust-note fade-up delay-5">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia 7 dias</p>
+    <p class="trust-note fade-up delay-5">✨ Garanta seu acesso antecipado &nbsp;·&nbsp; Lista exclusiva de fundadores</p>
   </div>
 </section>
 
@@ -526,38 +524,33 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
       <div class="bonus-card fade-up delay-3">
         <div class="bonus-icon">💬</div>
         <div class="bonus-title">Grupo de fundadores no Telegram</div>
-        <p class="bonus-desc">Acesso ao grupo exclusivo de quem comprou na fase de lançamento. Tire dúvidas, compartilhe resultados e evolua junto.</p>
+        <p class="bonus-desc">Acesso ao grupo exclusivo de fundadores do lançamento. Tire dúvidas, compartilhe resultados e evolua junto.</p>
         <span class="bonus-value">Valor: R$197</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ANCORAGEM DE PREÇO ═══════════════════════════════════════ -->
-<section id="preco">
+<!-- ═══ LISTA DE ESPERA (ÂNCORA) ════════════════════════════════ -->
+<section id="lista-espera">
   <div class="container">
-    <span class="section-label fade-up">Investimento</span>
-    <h2 class="section-title fade-up delay-1">Valor total vs. <span>preço de lançamento</span></h2>
+    <span class="section-label fade-up">Lista de Espera</span>
+    <h2 class="section-title fade-up delay-1">Seja o <span>primeiro a saber</span></h2>
     <div class="gold-rule fade-up delay-2"></div>
-    <div class="preco-box fade-up delay-3">
-      <div class="preco-label">🔥 Oferta de lançamento</div>
-      <div class="preco-row"><span class="label">E-book completo (6 módulos)</span><span class="value strike">R$147</span></div>
-      <div class="preco-row"><span class="label">Templates SOUL.md</span><span class="value strike">R$97</span></div>
-      <div class="preco-row"><span class="label">Checklist 7 dias</span><span class="value strike">R$47</span></div>
-      <div class="preco-row"><span class="label">Grupo de fundadores</span><span class="value strike">R$197</span></div>
-      <hr class="preco-divider" />
-      <div class="preco-row"><span class="label">Valor total</span><span class="value strike">R$488</span></div>
-      <div class="preco-row"><span class="label">Desconto de lançamento</span><span class="value discount">− R$431</span></div>
-      <hr class="preco-divider" />
-      <div class="preco-row"><span class="label" style="font-weight:600;color:var(--text)">Preço hoje</span><span class="value total">R$57</span></div>
-      <br/>
-      <a href="#planos" onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary" style="display:block;width:100%;text-align:center;">Garantir meu acesso por R$57 →</a>
-      <p style="font-size:0.78rem;color:var(--text-sec);margin-top:0.85rem;">Após o lançamento (01/04): R$97</p>
-      <div class="trust-seals">
-        <span>🔒 Pagamento seguro</span>
-        <span>✅ Acesso imediato</span>
-        <span>💰 Garantia 7 dias</span>
+    <p class="section-intro fade-up delay-3">O Panteão Digital abre no dia <strong>25/03/2026</strong>. Inscreva-se na lista exclusiva de fundadores e seja notificado assim que as portas abrirem.</p>
+    <div class="preco-box fade-up delay-4" style="max-width:480px;margin:0 auto;text-align:left;">
+      <div class="preco-label">🏛️ Lista exclusiva de fundadores</div>
+      <form id="waitlist-form" style="display:flex;flex-direction:column;gap:0.85rem;margin-top:1rem;">
+        <input type="text" id="wl-nome" placeholder="Seu nome (opcional)" style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
+        <input type="email" id="wl-email" placeholder="Seu melhor e-mail *" required style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.5);border-radius:6px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;" />
+        <button type="submit" class="btn-primary" style="width:100%;cursor:pointer;border:none;">Quero ser avisado no lançamento →</button>
+      </form>
+      <div id="waitlist-success" style="display:none;text-align:center;padding:1.5rem;color:var(--gold);">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🏛️</div>
+        <strong>Você está na lista!</strong><br/>
+        <span style="font-size:0.9rem;color:var(--text-sec);">Te avisamos no dia 25/03. Fique de olho no seu e-mail.</span>
       </div>
+      <p style="font-size:0.78rem;color:var(--text-sec);margin-top:0.85rem;text-align:center;">✨ Sem spam. Apenas o aviso de lançamento.</p>
     </div>
   </div>
 </section>
@@ -637,9 +630,9 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
 <section id="garantia">
   <div class="container">
     <div class="garantia-box fade-up">
-      <div class="garantia-icon">🛡️</div>
-      <div class="garantia-title">Garantia incondicional de 7 dias</div>
-      <p class="garantia-text">Se você não ficar satisfeito por qualquer motivo — ou sem nenhum motivo — devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia, sem demora.</p>
+      <div class="garantia-icon">🏛️</div>
+      <div class="garantia-title">Lançamento oficial: 25 de Março de 2026</div>
+      <p class="garantia-text">O e-book está em fase final de produção. Inscreva-se na lista de espera e seja avisado assim que as portas abrirem. Os primeiros a se inscrever terão acesso prioritário.</p>
     </div>
   </div>
 </section>
@@ -660,16 +653,16 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
         <div class="faq-answer">Sim. O sistema de agentes é adaptável a qualquer vertical: agências, consultorias, e-commerce, infoprodutos, SaaS, escritórios, clínicas e mais. Os templates incluídos cobrem os casos mais comuns.</div>
       </details>
       <details>
-        <summary>Como recebo após a compra?</summary>
-        <div class="faq-answer">Acesso imediato. Assim que o pagamento é confirmado você recebe um e-mail da Kiwify com o link para baixar o PDF e acessar todos os bônus.</div>
+        <summary>Como faço para comprar no lançamento?</summary>
+        <div class="faq-answer">Inscreva-se na lista de espera acima. No dia 25/03/2026 você receberá um e-mail com o link de acesso e as instruções de compra. Quem estiver na lista terá prioridade.</div>
       </details>
       <details>
         <summary>E se eu tiver dúvidas durante a implementação?</summary>
         <div class="faq-answer">Você terá acesso ao grupo exclusivo de fundadores no Telegram, onde pode tirar dúvidas diretamente com a equipe STM e com outros usuários que já implementaram o sistema.</div>
       </details>
       <details>
-        <summary>Qual a diferença do preço de lançamento?</summary>
-        <div class="faq-answer">O preço de R$57 é válido apenas durante os 7 dias de lançamento (25/03 a 01/04/2026). Após esse período, o valor sobe para R$97 e não haverá novo desconto.</div>
+        <summary>Por que ter lista de espera?</summary>
+        <div class="faq-answer">O e-book está em fase final de produção e abre oficialmente no dia 25/03/2026. A lista de espera garante que você seja notificado assim que as portas abrirem — além de ter acesso antecipado aos planos de fundadores.</div>
       </details>
       <details>
         <summary>O conteúdo fica desatualizado?</summary>
@@ -680,68 +673,60 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
         <div class="faq-answer">Sim. O e-book está disponível em PDF (leitura em qualquer dispositivo) e o OpenClaw pode ser controlado inteiramente pelo Telegram — inclusive pelo celular.</div>
       </details>
       <details>
-        <summary>Como funciona a garantia?</summary>
-        <div class="faq-answer">7 dias a partir da compra, 100% do valor devolvido, sem perguntas. Basta enviar um e-mail para suporte@stmgroup.com.br ou uma mensagem no grupo de fundadores.</div>
+        <summary>Quero entrar em contato antes do lançamento.</summary>
+        <div class="faq-answer">Pode enviar um e-mail para suporte@stmgroup.com.br ou entrar em contato via Instagram @panteao_digital. Responderemos em até 24h.</div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ═══ PLANOS ═══════════════════════════════════════════════════ -->
+<!-- ═══ O QUE VEM NO PANTEÃO ══════════════════════════════════════ -->
 <section id="planos">
   <div class="container">
-    <span class="section-label fade-up">Planos</span>
-    <h2 class="section-title fade-up delay-1">Escolha o seu <span>plano</span></h2>
+    <span class="section-label fade-up">O que você vai receber</span>
+    <h2 class="section-title fade-up delay-1">Tudo incluído no <span>lançamento</span></h2>
     <div class="gold-rule fade-up delay-2"></div>
-    <p class="section-intro fade-up delay-3">Todos incluem acesso imediato, garantia de 7 dias e atualizações gratuitas.</p>
-    <div class="plans-grid">
+    <p class="section-intro fade-up delay-3">Quem entrar na lista de espera será o primeiro a acessar quando abrirmos no dia 25/03.</p>
+    <div class="plans-grid" style="grid-template-columns: repeat(auto-fit,minmax(220px,1fr));">
 
       <!-- STARTER -->
       <div class="plan-card fade-up delay-1">
         <div class="plan-name">Starter</div>
-        <div class="plan-price">R$57</div>
-        <div class="plan-price-note">pagamento único</div>
         <ul class="plan-features">
           <li><span class="check">✓</span> E-book completo (6 módulos)</li>
           <li><span class="check">✓</span> Checklist de setup em 7 dias</li>
           <li><span class="check">✓</span> Acesso ao grupo de fundadores</li>
         </ul>
-        <a href="https://pay.kiwify.com.br/61im3UA" class="btn-primary plan-cta">Começar por R$57 →</a>
+        <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary plan-cta">Entrar na lista de espera →</a>
       </div>
 
       <!-- PRO -->
       <div class="plan-card featured fade-up delay-2">
         <div class="plan-name">Pro</div>
-        <div class="plan-price">R$97</div>
-        <div class="plan-price-note">pagamento único</div>
         <ul class="plan-features">
           <li><span class="check">✓</span> Tudo do Starter</li>
           <li><span class="check">✓</span> Pack de Templates SOUL.md</li>
-          <li><span class="check">✓</span> Templates prontos para 8 agentes e muitos outros</li>
+          <li><span class="check">✓</span> Templates prontos para 8 agentes</li>
           <li><span class="check">✓</span> Suporte prioritário no grupo</li>
         </ul>
-        <a href="https://pay.kiwify.com.br/dDsfO8g" class="btn-primary plan-cta">Garantir PRO por R$97 →</a>
+        <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary plan-cta">Entrar na lista de espera →</a>
       </div>
 
       <!-- VIP -->
       <div class="plan-card fade-up delay-3">
         <div class="plan-name">VIP</div>
-        <div class="plan-price">R$197</div>
-        <div class="plan-price-note">pagamento único</div>
         <ul class="plan-features">
           <li><span class="check">✓</span> Tudo do Pro</li>
           <li><span class="check">✓</span> Webinar ao vivo de implementação</li>
           <li><span class="check">✓</span> Gravação do webinar (acesso vitalício)</li>
           <li><span class="check">✓</span> Sessão de Q&A exclusiva</li>
         </ul>
-        <a href="https://pay.kiwify.com.br/2kdTInq" class="btn-primary plan-cta">Garantir VIP por R$197 →</a>
+        <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary plan-cta">Entrar na lista de espera →</a>
       </div>
 
       <!-- FUNDADOR -->
       <div class="plan-card fundador fade-up delay-4">
         <div class="plan-name">Fundador</div>
-        <div class="plan-price">R$497</div>
-        <div class="plan-price-note">pagamento único</div>
         <ul class="plan-features">
           <li><span class="check">✓</span> Tudo do VIP</li>
           <li><span class="check">✓</span> Comunidade privada de Fundadores</li>
@@ -749,7 +734,7 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
           <li><span class="check">✓</span> Mentorias em grupo mensais</li>
           <li><span class="check">✓</span> Badge exclusivo de Fundador 🏛️</li>
         </ul>
-        <a href="https://pay.kiwify.com.br/OefFJhT" class="plan-cta">Ser Fundador por R$497 →</a>
+        <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="plan-cta">Quero ser Fundador →</a>
       </div>
 
     </div>
@@ -759,13 +744,11 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
 <!-- ═══ CTA FINAL ════════════════════════════════════════════════ -->
 <section id="cta-final">
   <div class="container">
-    <span class="section-label fade-up">Última chamada</span>
-    <p class="urgency-text fade-up delay-1" id="urgency-days">⏰ Faltam 10 dias com preço de R$57</p>
-    <h2 class="section-title fade-up delay-2">Comece a construir seu<br/><span>Panteão hoje</span></h2>
-    <div class="cta-price fade-up delay-3">R$57</div>
-    <p class="cta-price-after fade-up delay-4">Após o lançamento (01/04): R$97</p>
-    <a href="#planos" onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary fade-up delay-5" style="font-size:0.8rem;padding:1.1rem 2.5rem;letter-spacing:0.12em;">Garantir meu acesso agora →</a>
-    <p class="trust-note fade-up delay-6" style="margin-top:1rem;">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia 7 dias</p>
+    <span class="section-label fade-up">Não fique de fora</span>
+    <p class="urgency-text fade-up delay-1" id="urgency-days">🗓️ Lançamento em 25/03/2026</p>
+    <h2 class="section-title fade-up delay-2">Garanta seu lugar na<br/><span>lista de fundadores</span></h2>
+    <a href="#lista-espera" onclick="document.getElementById('lista-espera').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary fade-up delay-4" style="font-size:0.8rem;padding:1.1rem 2.5rem;letter-spacing:0.12em;">Quero ser avisado no lançamento →</a>
+    <p class="trust-note fade-up delay-5" style="margin-top:1rem;">✨ Gratuito entrar na lista &nbsp;·&nbsp; Sem spam &nbsp;·&nbsp; Aviso apenas no dia 25/03</p>
   </div>
 </section>
 
@@ -789,7 +772,7 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
 
     if (diff <= 0) {
       if (navEl) navEl.textContent = 'Disponível agora!';
-      if (urgencyEl) urgencyEl.textContent = '🔥 Preço de lançamento R$57 ativo!';
+      if (urgencyEl) urgencyEl.textContent = '🏛️ O Panteão Digital já está no ar!';
       return;
     }
 
@@ -802,8 +785,8 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
     if (navEl) navEl.textContent = str;
     if (urgencyEl) {
       urgencyEl.textContent = days === 0
-        ? '⏰ Últimas horas com preço de R$57!'
-        : `⏰ Faltam ${days} dia${days > 1 ? 's' : ''} com preço de R$57`;
+        ? '🗓️ Lançamento hoje — inscreva-se na lista!'
+        : `🗓️ Lançamento em ${days} dia${days > 1 ? 's' : ''}`;
     }
   }
 
@@ -816,6 +799,29 @@ src="https://www.facebook.com/tr?id=1993275764902945&ev=PageView&noscript=1"
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ─── Waitlist Form ────────────────────────────────────────────
+  const wlForm = document.getElementById('waitlist-form');
+  if (wlForm) {
+    wlForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('wl-nome').value.trim();
+      const email = document.getElementById('wl-email').value.trim();
+      if (!email) return;
+      const btn = wlForm.querySelector('button[type="submit"]');
+      btn.textContent = 'Entrando na lista...';
+      btn.disabled = true;
+      try {
+        await fetch('https://relay.stmgroup.com.br/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, email })
+        });
+      } catch(err) { /* API offline — silently ignore, UX still confirms */ }
+      wlForm.style.display = 'none';
+      document.getElementById('waitlist-success').style.display = 'block';
+    });
+  }
 </script>
 
 </body>
